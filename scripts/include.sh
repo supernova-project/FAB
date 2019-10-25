@@ -1,6 +1,6 @@
 # !/usr/bin/env sh
 #
-# fab.sh
+# scripts/include.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -23,40 +23,44 @@
 # SOFTWARE.
 #
 
+#
+# This is the include script to bring all init dependancies into
+# the init environment
+#
 
-export DIR=$(pwd)
-export fab_status="1"
-
-git_update() {
-    echo "attempting to update build environment.."
-    git pull --rebase origin master    
-}
-
-main() {
-    case $fab_status in
-        # start/restart the build environment
-        1) 
-            sh $DIR/scripts/main.sh ${@}
-            fab_status="${?}"
-            main;;
-        # Update the build environment
-        2) 
-            git_update
-            fab_status="1"
-            main ${@};;
-        # exit the build environment
-        0|*) 
-            exit 0;;
-    esac
-
-
-}
-
-
-
-
-# terminal entry
+# main scripts
 # ------------------------------------------------------------
-if [[ "$(basename -- "$0")" == "fab.sh" ]]; then
-    main ${@}
-fi
+source $DIR/scripts/config.sh
+source $DIR/scripts/alert.sh
+source $DIR/scripts/macros.sh
+source $DIR/scripts/ui.sh
+
+
+# fab environment scripts
+# ------------------------------------------------------------
+source $DIR/scripts/env/env.sh
+source $DIR/scripts/env/ui.sh
+
+
+
+
+
+
+# tools scripts
+# ------------------------------------------------------------
+# source $DIR/scripts/tools/deps/install.sh
+# source $DIR/scripts/tools/tools_install.sh
+
+
+
+# build scripts
+# ------------------------------------------------------------
+#source $DIR/scripts/build.sh
+#source $DIR/scripts/build_deps.sh
+
+# build environment ui
+# ------------------------------------------------------------
+# source $DIR/scripts/ui/headers.sh
+# source $DIR/scripts/ui/menus.sh
+# source $DIR/scripts/ui/options.sh
+

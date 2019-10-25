@@ -1,6 +1,6 @@
 # !/usr/bin/env sh
 #
-# fab.sh
+# scripts/config.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -23,40 +23,49 @@
 # SOFTWARE.
 #
 
+#
+# This script contains temporay functions added to hotfix the build
+# environment.
+#
 
-export DIR=$(pwd)
-export fab_status="1"
-
-git_update() {
-    echo "attempting to update build environment.."
-    git pull --rebase origin master    
-}
-
-main() {
-    case $fab_status in
-        # start/restart the build environment
-        1) 
-            sh $DIR/scripts/main.sh ${@}
-            fab_status="${?}"
-            main;;
-        # Update the build environment
-        2) 
-            git_update
-            fab_status="1"
-            main ${@};;
-        # exit the build environment
-        0|*) 
-            exit 0;;
-    esac
-
-
-}
-
-
-
-
-# terminal entry
+# generic variables
 # ------------------------------------------------------------
-if [[ "$(basename -- "$0")" == "fab.sh" ]]; then
-    main ${@}
-fi
+export install=0
+export fab_vers="$(cat ${DIR}/VERSION)"
+export dec_vers=""
+export fab_root="/tmp/fab"
+
+
+# build variables
+# ------------------------------------------------------------
+# this is the architecture Supernova
+# is being built on
+build_arch=$(uname -r)
+build_distro=""
+build_pm=""
+
+# this is the architecture on which you
+# will be installing/running Supernova
+export host_arch=""
+export host_pm=""
+export host_env=""
+
+# this is where installation tools will be built to
+export tools="${fab_root}/tools"
+
+
+# install variables
+# ------------------------------------------------------------
+# "/" host
+export root=""
+# "/home" host
+export home=""
+# "/boot" host
+export boot=""
+# "/update" host
+export update=""
+
+# Add init tools to PATH
+# ------------------------------------------------------------
+# export PATH="$PATH:$DIR/tools/bin"
+

@@ -1,6 +1,6 @@
 # !/usr/bin/env sh
 #
-# fab.sh
+# scripts/macros.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -23,40 +23,42 @@
 # SOFTWARE.
 #
 
+#
+# This script is is a collection of generic functions used by the init
+# utility in various different other scripts.
+#
 
-export DIR=$(pwd)
-export fab_status="1"
-
-git_update() {
-    echo "attempting to update build environment.."
-    git pull --rebase origin master    
+check_root() {
+    if [ $EUID -ne 0 ]; then
+        echo "ERROR: Supernova Init must be run as root"
+        exit 0
+    fi
 }
 
-main() {
-    case $fab_status in
-        # start/restart the build environment
-        1) 
-            sh $DIR/scripts/main.sh ${@}
-            fab_status="${?}"
-            main;;
-        # Update the build environment
-        2) 
-            git_update
-            fab_status="1"
-            main ${@};;
-        # exit the build environment
-        0|*) 
-            exit 0;;
-    esac
+connect_err() {
+  echo "WARNING: cannot connect to $1. Press any key to continue."
+  read -n 1 -s
+}
 
+invalid_input() {
+  echo "Invalid option. Press any key to continue."
+  read -n 1 -s
+}
 
+check_connect() {
+  if curl -s --head  --request GET "$1" | grep "200 OK" > /dev/null; then
+     echo "ok"
+  else
+     echo "err"
+  fi
 }
 
 
-
-
-# terminal entry
-# ------------------------------------------------------------
-if [[ "$(basename -- "$0")" == "fab.sh" ]]; then
-    main ${@}
-fi
+pkg_info() {
+# Print package information
+echo "$installMessage"
+echo "\
+Host Repo:    $host_repo
+Pkg Name:     $pkg_name
+Pkg Version:  $pkg_version"
+}

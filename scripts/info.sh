@@ -1,26 +1,26 @@
-#  !/usr/bin/env sh
+# !/usr/bin/env sh
 #
-#  FAB/ui/headers.sh
+# FAB/ui/headers.sh
 #
-#  Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
+# Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
-#  Permission is hereby granted, free of charge, to any person obtaining a copy
-#  of this software and associated documentation files (the "Software"), to deal
-#  in the Software without restriction, including without limitation the rights
-#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#  copies of the Software, and to permit persons to whom the Software is
-#  furnished to do so, subject to the following conditions:
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 #
-#  The above copyright notice and this permission notice shall be included in all
-#  copies or substantial portions of the Software.
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 #
-#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#  SOFTWARE.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 #
 
 header_usage="\
@@ -54,9 +54,8 @@ COMPILER OPTIONS
 "
 
 header_version="\
-  init version: ${vers}
-  Supernova build: ${dec_vers}
-
+FAB Suite Version ${fab_vers}
+Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 "
 
 
@@ -64,9 +63,9 @@ header_version="\
 header_main="\
 -------------------------------------------------------------------------
 |
-| Welcome to the Supernova initialiser script
+| Welcome to the FAB Suite
 | Copyright (c) 2017-2019 Supernova Development Team
-| <polar@ever3st.com>
+| <supernova@ever3st.com>
 |
 -------------------------------------------------------------------------
 
@@ -105,14 +104,7 @@ a="\
   echo "$a"
 }
 
-header_decinit="\
--------------------------------------------------------------------------
-|
-| Configure your Supernova installation
-|
--------------------------------------------------------------------------
 
-"
 
 header_config="\
 -------------------------------------------------------------------------

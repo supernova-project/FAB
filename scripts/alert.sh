@@ -1,6 +1,6 @@
 # !/usr/bin/env sh
 #
-# fab.sh
+# scripts/alert.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -24,39 +24,61 @@
 #
 
 
-export DIR=$(pwd)
-export fab_status="1"
-
-git_update() {
-    echo "attempting to update build environment.."
-    git pull --rebase origin master    
-}
-
-main() {
-    case $fab_status in
-        # start/restart the build environment
-        1) 
-            sh $DIR/scripts/main.sh ${@}
-            fab_status="${?}"
-            main;;
-        # Update the build environment
-        2) 
-            git_update
-            fab_status="1"
-            main ${@};;
-        # exit the build environment
-        0|*) 
-            exit 0;;
-    esac
-
-
-}
-
-
-
-
-# terminal entry
+# errors
 # ------------------------------------------------------------
-if [[ "$(basename -- "$0")" == "fab.sh" ]]; then
-    main ${@}
-fi
+
+error_throw() {
+  local error_text="[ERROR]: ${1}"
+  local error_type=${2}
+  echo "${error_text}"
+  exit 0
+}
+
+err_unknown_param() {
+	error_throw "Unknown Parameter \"${1}\""
+}
+
+# warnings
+# ------------------------------------------------------------
+
+warn_throw() {
+  local warn_text="[WARNING]: ${1}"
+  echo "${warn_text}"
+}
+
+# notifies
+# ------------------------------------------------------------
+
+
+notify_install="\
+
+Supernova release: 
+target envrionment: 
+
+Supernova root target: ${root_mnt}
+Supernova home target: ${home_mnt}
+Supernova boot target: ${boot_mnt}
+Supernova install target: ${install_mnt}
+
+build architecture: ${build_arch}
+build Package manager: ${build_pm}
+host architecture: ${host_build}
+host Package manager: ${host_pm}
+
+do you wish to continue? [y/n]
+
+"
+
+# information menus
+# --------------------------------------------
+
+version() {
+  echo "${header_version}"
+  exit 0
+}
+
+usage() {
+  echo "${header_usage}"
+  exit 0
+}
+

@@ -1,6 +1,6 @@
-# !/usr/bin/env sh
+# !/usr/bin/env bash
 #
-# fab.sh
+# FAB/tools/install.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -24,39 +24,74 @@
 #
 
 
-export DIR=$(pwd)
-export fab_status="1"
+get_crosstool_ng() {
+  cd $DIR/src/tools
+  addr="https://github.com/crosstool-ng/crosstool-ng"
+  echo "Checking crosstool-ng repo is alive.."
+  x=$(check_connect $addr)
 
-git_update() {
-    echo "attempting to update build environment.."
-    git pull --rebase origin master    
-}
-
-main() {
-    case $fab_status in
-        # start/restart the build environment
-        1) 
-            sh $DIR/scripts/main.sh ${@}
-            fab_status="${?}"
-            main;;
-        # Update the build environment
-        2) 
-            git_update
-            fab_status="1"
-            main ${@};;
-        # exit the build environment
-        0|*) 
-            exit 0;;
-    esac
-
+  if [ $x == "ok" ]; then
+    git clone $addr
+    cd crosstool-ng
+    git checkout origin/master
+  else
+    connect_err "crosstool-ng repo"
+  fi
 
 }
 
 
+build_crosstool_ng() {
+  cd $DIR/src/tools/crosstool-ng
+  ./bootstrap
+  ./configure --prefix=$DIR/tools/
+  make
+  make install
+}
 
 
-# terminal entry
-# ------------------------------------------------------------
-if [[ "$(basename -- "$0")" == "fab.sh" ]]; then
-    main ${@}
-fi
+get_sqlite() {
+  cd $DIR/src/tools
+  addr="https://www.sqlite.org/src/tarball/sqlite.tar.gz?r=release"
+  echo "Checking sqlite is alive.."
+  x=$(check_connect $addr)
+
+  if [ $x == "ok" ]; then
+    wget -O sqlite.tar.xz $addr
+    tar -xf sqlite.tar.xz
+    rm sqlite.tar.xz
+  else
+    connect_err "sqlite tar mirror"
+  fi
+
+}
+
+
+build_sqlite() {
+  cd $DIR/src/tools/sqlite
+}
+
+
+get_tools() {
+  rm -rf $DIR/src/tools
+  mkdir $DIR/src/tools
+  get_crosstool_ng
+  get_sqlite
+}
+
+
+build_tools() {
+  build_crosstool_ng
+  build_sqlite
+}
+
+
+install_tools() {
+  clear
+
+  get_tools
+  #build_tools
+
+  echo "Tools installed. Press any key to continue."
+  read -n 1 -s
+}

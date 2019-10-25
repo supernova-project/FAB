@@ -1,6 +1,6 @@
 # !/usr/bin/env sh
 #
-# fab.sh
+# scripts/env/ui.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -24,39 +24,17 @@
 #
 
 
-export DIR=$(pwd)
-export fab_status="1"
+header_env="\
+-------------------------------------------------------------------------
+|
+| Configure your FAB environment
+|
+-------------------------------------------------------------------------
 
-git_update() {
-    echo "attempting to update build environment.."
-    git pull --rebase origin master    
-}
+"
 
-main() {
-    case $fab_status in
-        # start/restart the build environment
-        1) 
-            sh $DIR/scripts/main.sh ${@}
-            fab_status="${?}"
-            main;;
-        # Update the build environment
-        2) 
-            git_update
-            fab_status="1"
-            main ${@};;
-        # exit the build environment
-        0|*) 
-            exit 0;;
-    esac
+options_env="\
+  1. 
 
-
-}
-
-
-
-
-# terminal entry
-# ------------------------------------------------------------
-if [[ "$(basename -- "$0")" == "fab.sh" ]]; then
-    main ${@}
-fi
+  0. Return
+"
