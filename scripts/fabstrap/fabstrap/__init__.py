@@ -1,6 +1,4 @@
-# !/usr/bin/env sh
-#
-# scripts/config.sh
+# scripts/pyfab/__init__.py
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -24,48 +22,43 @@
 #
 
 #
-# This script contains temporay functions added to hotfix the build
-# environment.
+# This is the include script to bring all init dependancies into
+# the init environment
 #
 
-# generic variables
+# main scripts
 # ------------------------------------------------------------
-export install=0
-export fab_vers="$(cat ${DIR}/VERSION)"
-export dec_vers=""
-export fab_root="/tmp/fab"
+source $DIR/scripts/config.sh
+source $DIR/scripts/alert.sh
+source $DIR/scripts/macros.sh
+source $DIR/scripts/ui.sh
 
 
-# build variables
+# fab environment scripts
 # ------------------------------------------------------------
-# this is the architecture Supernova
-# is being built on
-build_arch=$(uname -r)
-build_distro=""
-build_pm=""
-
-# this is the architecture on which you
-# will be installing/running Supernova
-export host_arch=""
-export host_pm=""
-export host_env=""
-
-# this is where installation tools will be built to
-export tools="${fab_root}/tools"
+source $DIR/scripts/env/env.sh
+source $DIR/scripts/env/ui.sh
 
 
-# install variables
+
+
+
+
+# tools scripts
 # ------------------------------------------------------------
-# "/" host
-export root=""
-# "/home" host
-export home=""
-# "/boot" host
-export boot=""
-# "/update" host
-export update=""
+# source $DIR/scripts/tools/deps/install.sh
+# source $DIR/scripts/tools/tools_install.sh
 
-# Add init tools to PATH
+
+
+# build scripts
 # ------------------------------------------------------------
-# export PATH="$PATH:$DIR/tools/bin"
+#source $DIR/scripts/build.sh
+#source $DIR/scripts/build_deps.sh
+
+# build environment ui
+# ------------------------------------------------------------
+# source $DIR/scripts/ui/headers.sh
+# source $DIR/scripts/ui/menus.sh
+# source $DIR/scripts/ui/options.sh
 

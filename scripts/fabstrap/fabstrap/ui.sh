@@ -1,6 +1,4 @@
-# !/usr/bin/env sh
-#
-# scripts/alert.sh
+# scripts/ui.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -24,61 +22,24 @@
 #
 
 
-# errors
-# ------------------------------------------------------------
-
-error_throw() {
-  local error_text="[ERROR]: ${1}"
-  local error_type=${2}
-  echo "${error_text}"
-  exit 0
-}
-
-err_unknown_param() {
-	error_throw "Unknown Parameter \"${1}\""
-}
-
-# warnings
-# ------------------------------------------------------------
-
-warn_throw() {
-  local warn_text="[WARNING]: ${1}"
-  echo "${warn_text}"
-}
-
-# notifies
-# ------------------------------------------------------------
-
-
-notify_install="\
-
-Supernova release: 
-target envrionment: 
-
-Supernova root target: ${root_mnt}
-Supernova home target: ${home_mnt}
-Supernova boot target: ${boot_mnt}
-Supernova install target: ${install_mnt}
-
-build architecture: ${build_arch}
-build Package manager: ${build_pm}
-host architecture: ${host_build}
-host Package manager: ${host_pm}
-
-do you wish to continue? [y/n]
+header_main="\
+-------------------------------------------------------------------------
+|
+| Welcome to the FAB Suite
+| Copyright (c) 2017-2019 Supernova Development Team
+| <supernova@ever3st.com>
+|
+-------------------------------------------------------------------------
 
 "
 
-# information menus
-# --------------------------------------------
+options_main="\
+ 1. Setup FAB Environment
+ 2. !!Build options
+ 3. !!Host options
 
-version() {
-  echo "${header_version}"
-  exit 0
-}
+ 5. !!Configure Supernova installation
+ 6. Install Supernova
 
-usage() {
-  echo "${header_usage}"
-  exit 0
-}
-
+ 0. Exit
+"

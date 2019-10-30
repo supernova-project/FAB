@@ -36,7 +36,7 @@ main() {
     case $fab_status in
         # start/restart the build environment
         1) 
-            sh $DIR/scripts/main.sh ${@}
+            python $DIR/scripts/pyfab/main.py ${@}
             fab_status="${?}"
             main;;
         # Update the build environment

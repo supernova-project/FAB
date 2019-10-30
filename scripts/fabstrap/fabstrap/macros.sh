@@ -1,6 +1,4 @@
-# !/usr/bin/env sh
-#
-# scripts/include.sh
+# scripts/macros.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -24,43 +22,41 @@
 #
 
 #
-# This is the include script to bring all init dependancies into
-# the init environment
+# This script is is a collection of generic functions used by the init
+# utility in various different other scripts.
 #
 
-# main scripts
-# ------------------------------------------------------------
-source $DIR/scripts/config.sh
-source $DIR/scripts/alert.sh
-source $DIR/scripts/macros.sh
-source $DIR/scripts/ui.sh
+check_root() {
+    if [ $EUID -ne 0 ]; then
+        echo "ERROR: Supernova Init must be run as root"
+        exit 0
+    fi
+}
+
+connect_err() {
+  echo "WARNING: cannot connect to $1. Press any key to continue."
+  read -n 1 -s
+}
+
+invalid_input() {
+  echo "Invalid option. Press any key to continue."
+  read -n 1 -s
+}
+
+check_connect() {
+  if curl -s --head  --request GET "$1" | grep "200 OK" > /dev/null; then
+     echo "ok"
+  else
+     echo "err"
+  fi
+}
 
 
-# fab environment scripts
-# ------------------------------------------------------------
-source $DIR/scripts/env/env.sh
-source $DIR/scripts/env/ui.sh
-
-
-
-
-
-
-# tools scripts
-# ------------------------------------------------------------
-# source $DIR/scripts/tools/deps/install.sh
-# source $DIR/scripts/tools/tools_install.sh
-
-
-
-# build scripts
-# ------------------------------------------------------------
-#source $DIR/scripts/build.sh
-#source $DIR/scripts/build_deps.sh
-
-# build environment ui
-# ------------------------------------------------------------
-# source $DIR/scripts/ui/headers.sh
-# source $DIR/scripts/ui/menus.sh
-# source $DIR/scripts/ui/options.sh
-
+pkg_info() {
+# Print package information
+echo "$installMessage"
+echo "\
+Host Repo:    $host_repo
+Pkg Name:     $pkg_name
+Pkg Version:  $pkg_version"
+}

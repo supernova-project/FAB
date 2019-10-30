@@ -1,6 +1,4 @@
-# !/usr/bin/env sh
-#
-# scripts/main.sh
+# scripts/config.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
@@ -23,90 +21,49 @@
 # SOFTWARE.
 #
 
-# include dependancies
+#
+# This script contains temporay functions added to hotfix the build
+# environment.
+#
+
+# generic variables
 # ------------------------------------------------------------
-source ${DIR}/scripts/include.sh
+export install=0
+export fab_vers="$(cat ${DIR}/VERSION)"
+export dec_vers=""
+export fab_root="/tmp/fab"
 
 
-
-
-# opts
+# build variables
 # ------------------------------------------------------------
-parse_opts() {
-    while [ ${#} -gt 0 ]; do
-        case ${1} in
-            -v|--version)
-                version;;
-            -h|--help)
-                usage;;
-            -i | --install)
-                echo "direct installation selected."
-                install=1
-                ;;
-            --target_machine=*)
-                target_machine="${i#*=}"
-                shift;;
-            --host_machine=*)
-                host_machine="${1#*=}"
-                shift;;
-            --host_pm=*)
-                host_pm="${i#*=}"
-                shift;;
-            *)
-                err_unknown_param "${1}";;
-      esac
-    done
-}
+# this is the architecture Supernova
+# is being built on
+build_arch=$(uname -r)
+build_distro=""
+build_pm=""
+
+# this is the architecture on which you
+# will be installing/running Supernova
+export host_arch=""
+export host_pm=""
+export host_env=""
+
+# this is where installation tools will be built to
+export tools="${fab_root}/tools"
 
 
-
-
-# menu
+# install variables
 # ------------------------------------------------------------
-menu_main() {
-  clear
-  echo "${header_main}${options_main}"
-  read option
+# "/" host
+export root=""
+# "/home" host
+export home=""
+# "/boot" host
+export boot=""
+# "/update" host
+export update=""
 
-  case ${option} in
-    0)
-      clear
-      exit 0;;
-    1)
-      env;;
-    2)
-      echo ""
-      ;;
-    3)
-      echo ""
-      ;;
-    4)
-      echo ""
-      ;;
-    
-    *)
-      invalid_input;;
-  esac
-  menu_main
-}
-
-
-
-
-
-# main
+# Add init tools to PATH
 # ------------------------------------------------------------
-main(){
-    #check_root
-    if [ $install -eq 1 ]; then
-        echo "FIX ME"
-    else
-        menu_main
-    fi
-    exit 0
-}
+# export PATH="$PATH:$DIR/tools/bin"
 
-
-
-
-parse_opts ${@} && main

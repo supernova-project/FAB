@@ -1,6 +1,4 @@
-# !/usr/bin/env sh
-#
-# FAB/ui/headers.sh
+# scripts/pyfab/ui/info.sh
 #
 # Copyright (c) 2017-2019 Supernova Development Team <supernova@ever3st.com>
 #
