@@ -1,0 +1,43 @@
+{
+
+    "prefix" : "/tmp",
+    "basesystem" : "linux",
+
+    "logger"  : {
+        "prefix" : ".",
+        "notify_log_file": " ./atlas.log'",
+        "warn_log_file" : "./atlas.log",
+        "err_log_file" : " './atlas.log'"
+    },
+
+    "host" : {
+        "arch" : "",
+        "env" : ""
+    },
+
+    "build" : {
+        "arch" : "",
+        "env" : ""},
+
+    "target" : {
+        "arch" : "",
+        "env" : ""},
+
+
+
+    "toolbox" : {
+        "prefix" : "/toolbox"},
+
+    "img_name" : "nova",
+
+    "disk_install_path" : {
+        "prefix" : "/fab",
+        "root" : "/",
+        "home" : "/home",
+        "boot" : "/boot",
+        "update" : "/update"}
+
+        
+
+
+}

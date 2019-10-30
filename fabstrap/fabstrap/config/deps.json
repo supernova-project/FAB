@@ -1,0 +1,32 @@
+{
+
+    "basesystems" : {
+        "linux" : {
+            "repo" : "https://github.com/supernova-project/"},
+        "freebsd" : {
+            "repo" : ""},
+        "netbsd" : {
+            "repo" : ""},
+        "haiku" : {
+            "repo" : ""},
+        "android" : {
+            "repo" : ""},
+        "darwin" : {
+            "repo" : ""}},
+
+    "programs" : {
+        "coreutils" : {
+            "installed_on_host" : true,
+            "repo" : "https://github.com/novapkgs/coreutils"},
+
+        "binutils" : {
+            "installed_on_host" : true,
+            "repo" : "https://github.com/novapkgs/binutils"},
+
+        "bison" : {
+            "installed_on_host" : true,
+            "repo" : "https://github.com/novapkgs/bison"}}
+
+
+
+}
