@@ -4,6 +4,13 @@ The FAB build sandbox consists of two tools used for building
 nix based operating systems; fabroot and fabstrap. Both tools 
 are related and greatly simplify the build-from-source process.
 
+supported basesystems:
+- !! Linux
+- !! FreeBSD
+- !! NetBSD
+- !! Haiku
+- !! Android
+- !! Darwin
 
 # fabstrap
 Fabstrap is used to create a build toolbox. The build
@@ -17,7 +24,7 @@ tarballs, configuration information, and more.
     - !! live cd media
     - !! installation media
     - !! direct installation to disk
-    - !! direct installation to image (ISO, IMG)
+    - !! direct installation to image (ISO, IMG, ROM)
 
 
 # fabroot

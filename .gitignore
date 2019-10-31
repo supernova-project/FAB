@@ -1,0 +1,3 @@
+
+# ignore python cache dirs
+**/__pycache__
