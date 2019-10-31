@@ -1,2 +1,0 @@
-include fabstrap/config/config.json
-include fabstrap/config/deps.json

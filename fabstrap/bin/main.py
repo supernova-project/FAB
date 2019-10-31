@@ -2,54 +2,16 @@
 #============================================================================
 
 import sys
+import os
 from fabstrap.logger import Logger
-from fabstrap.menu import Menu_Object
+from fabstrap.conf import Config
 
-def test():
-    print("aaaaaaaaaaa")
-
-main_header = """
--------------------------------------------------------------------------
-|
-| Welcome to the FAB Suite
-| Copyright (c) 2017-2019 Supernova Development Team
-| <supernova@ever3st.com>
-|
--------------------------------------------------------------------------
-"""
-
-main_items = [
-    {
-        'opts': {
-            
-            '1': 'a',
-            '2': 'b'
-        },
-        'args': {
-            '1': sys.exit,
-            '2': test
-        }
-    },
-    {
-        'opts': {
-            
-            '1': 'c',
-            '2': 'd'
-        },
-        'args': {
-            '1': sys.exit,
-            '2': test
-        }
-    }
-
-]
 
 class Fabstrap:
 
     def __init__(self):
-        self.main_menu = Menu_Object(header=main_header, items=main_items)
-  
-
+        self.pwd = os.path.dirname(__file__)
+        self.config_path = os.path.join(self.pwd, 'conf', 'config.json')
 
   
     # information menus
@@ -70,6 +32,9 @@ class Fabstrap:
     # load internal modules
     # --------------------------------------------
 
+    def load_config(self):
+        self.config = Config()
+
     def load_logger(self):
         self.logger = Logger(
             notify_log_file = self.notify_log_file,
@@ -85,6 +50,7 @@ class Fabstrap:
     def main(self):
         print("hello!")
         
+        self.load_config()
         #self.load_logger()
         
         self.main_menu.menu()
