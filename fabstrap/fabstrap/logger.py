@@ -1,3 +1,6 @@
+# Fabstrap logger
+#============================================================================
+
 import sys
 from datetime import datetime
 
@@ -46,7 +49,3 @@ class Logger:
     def disable_logging(self, err):
         self.log_warn('logging disabled')
         self.log_enable = False
-
-
-
-
