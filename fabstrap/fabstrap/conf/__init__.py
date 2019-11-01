@@ -1,1 +1,1 @@
-from fabstrap.conf.config import Config
+from fabstrap.conf.conf import Conf

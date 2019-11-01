@@ -3,6 +3,7 @@
 
 import sys
 from datetime import datetime
+from fabstrap.conf import Conf
 
 class Logger:
     def __init__(self, notify_log_file: str, warn_log_file: str, err_log_file: str, log_enable: bool):
