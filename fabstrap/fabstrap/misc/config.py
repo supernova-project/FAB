@@ -36,5 +36,5 @@ class Config:
 
     def get_default_config(self):
         path = os.path.join(self.path, "default.{}".format(self.name))
-        self.data = self.load_json(path)
+        return self.load_json(path)
 
