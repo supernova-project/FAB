@@ -2,7 +2,7 @@
 
     "basesystems" : {
         "linux" : {
-            "repo" : "https://github.com/supernova-project/"},
+            "repo" : "https://github.com/supernova-project/GNU-Linux"},
         "freebsd" : {
             "repo" : ""},
         "netbsd" : {

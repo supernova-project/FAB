@@ -3,9 +3,9 @@
     "basesystem": "linux", 
     "logger": {
         "prefix": ".", 
-        "notify_log_file": " ./atlas.log'", 
-        "warn_log_file": "./atlas.log", 
-        "err_log_file": " './atlas.log'"
+        "notify_log_file": " ./fabstrap.log'", 
+        "warn_log_file": "./fabstrap.log", 
+        "err_log_file": " './fabstrap.log'"
     }, 
     
     "host": {
